@@ -15,7 +15,7 @@ void inicializar_pilha(PILHA *p){
     p->topo = NULL;
 }
 
-void empilha(int dado, PILHA *p){
+void empilhar(int dado, PILHA *p){
     NO *ptr = (NO*) malloc(sizeof(NO));
     if(ptr == NULL){
         printf("Erro de alocação de nó\n");
@@ -34,7 +34,7 @@ int desempilhar(PILHA *p){
         printf("Pilha vazia");
         return 1;
     } else {
-        p->topo = ptr->prox;
+        p->topo = p->topo->prox;
         ptr->prox = NULL;
         dado = ptr->dado;
         free(ptr);
@@ -65,9 +65,9 @@ int main(){
     } else {
         inicializar_pilha(p1);
 
-        empilha(10, p1);
-        empilha(20, p1);
-        empilha(30, p1);
+        empilhar(10, p1);
+        empilhar(20, p1);
+        empilhar(30, p1);
 
         imprimir_pilha(p1);
 
