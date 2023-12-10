@@ -4,22 +4,19 @@
 
 #define N 3
 
-typedef struct T_FILA
-{
+typedef struct T_FILA{
     int dados[N];
     int fim;
 }T_FILA;
 
-void inicializar_fila(T_FILA *f)
-{
+void inicializar_fila(T_FILA *f){
     for(int i = 0; i < N; i++){
         f->dados[i] = 0;
     }
     f->fim = 0;
 }
 
-void infileira(int dado, T_FILA *f)
-{
+void infileira(int dado, T_FILA *f){
     if(f->fim == N){
         printf("Fila cheia.\n");
         return;
@@ -29,8 +26,7 @@ void infileira(int dado, T_FILA *f)
     }
 }
 
-int desenfileira(T_FILA *f)
-{
+int desenfileira(T_FILA *f){
     int dado;
     if(f->fim == 0){
         printf("Fila está vazia.\n");
@@ -45,8 +41,7 @@ int desenfileira(T_FILA *f)
     }
 }
 
-void imprimir(T_FILA *f)
-{
+void imprimir(T_FILA *f){
     printf("---------------\n");
     for(int i = 0; i < f->fim; i++){
         printf("%d \n", f->dados[i]);
@@ -54,9 +49,7 @@ void imprimir(T_FILA *f)
 }
 
 
-int main ()
-{
-
+int main (){
     T_FILA f1;
 
     inicializar_fila(&f1);
