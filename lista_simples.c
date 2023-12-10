@@ -105,6 +105,7 @@ int main() {
                 exit(0);
             }
         }
+        
     } while (opcao != 0);
 
     return 0;
