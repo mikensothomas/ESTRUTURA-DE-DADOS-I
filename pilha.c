@@ -15,13 +15,13 @@ void inicializar_pilha(PILHA *p){
     p->topo = NULL;
 }
 
-void empilhar(int dado, PILHA *p){
+void empilhar(int elemento, PILHA *p){
     NO *ptr = (NO*) malloc(sizeof(NO));
     if(ptr == NULL){
         printf("Erro de alocação de nó\n");
         return;
     } else {
-        ptr->dado = dado;
+        ptr->dado = elemento;
         ptr->prox = p->topo;
         p->topo = ptr;
     }
