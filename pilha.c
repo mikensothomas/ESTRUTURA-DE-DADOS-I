@@ -29,16 +29,16 @@ void empilhar(int elemento, PILHA *p){
 
 int desempilhar(PILHA *p){
     NO *ptr = p->topo;
-    int dado;
+    int elemento;
     if(ptr == NULL){
         printf("Pilha vazia");
         return 1;
     } else {
         p->topo = p->topo->prox;
         ptr->prox = NULL;
-        dado = ptr->dado;
+        elemento = ptr->dado;
         free(ptr);
-        return dado;
+        return elemento;
     }
 }
 
@@ -49,7 +49,7 @@ void imprimir_pilha(PILHA *p){
         return;
     } else {
         while (ptr != NULL){
-            printf("%d ", ptr->dado);
+            printf("\n%d ", ptr->dado);
             ptr = ptr->prox;
         }
         printf("\n");
