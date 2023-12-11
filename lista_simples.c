@@ -98,30 +98,30 @@ int main() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-        case 1:
-            printf("Digite o valor: ");
-            scanf("%d", &valor);
-            inserirNoInicio(&lista, valor);
-            break;
-        case 2:
-            printf("Digite o valor: ");
-            scanf("%d", &valor);
-            inserirNoFinal(&lista, valor);
-            break;
-        case 3:
-            printf("Digite o valor e o valor de referencia: ");
-            scanf("%d%d", &valor, &anterior);
-            inserirNoMeio(&lista, valor, anterior);
-            break;
-        case 4:
-            imprimirLista(lista);
-            break;
+            case 1:
+                printf("Digite o valor: ");
+                scanf("%d", &valor);
+                inserirNoInicio(&lista, valor);
+                break;
+            case 2:
+                printf("Digite o valor: ");
+                scanf("%d", &valor);
+                inserirNoFinal(&lista, valor);
+                break;
+            case 3:
+                printf("Digite o valor e o valor de referencia: ");
+                scanf("%d%d", &valor, &anterior);
+                inserirNoMeio(&lista, valor, anterior);
+                break;
+            case 4:
+                imprimirLista(lista);
+                break;
 
-        default:
-            if (opcao == 0) {
-                exit(0);
+            default:
+                if (opcao == 0) {
+                    exit(0);
+                }
             }
-        }
         
     } while (opcao != 0);
 
