@@ -111,6 +111,19 @@ No* remove_na_lista(No **lista, int num){
     return remover;
 }
 
+No* buscar_na_lisla(No **lista, int num){
+    No *auxi, *no = NULL;
+    auxi = *lista;
+    while (auxi && auxi->valor != num){
+        auxi = auxi->proximo;
+    }
+    if (auxi){
+        no = auxi;
+    }
+    
+    return no;
+}
+
 void imprimirLista(No *no) {
     printf("\n\tLista:");
     while (no) {
@@ -126,7 +139,7 @@ int main() {
     No *remover, *lista = NULL;
 
     do {
-        printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Remover\n\t6 - Imprimir\n");
+        printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Remover\n\t6 - Buscar\n\t7 - Imprimir\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -164,6 +177,16 @@ int main() {
             }
             break;
         case 6:
+            printf("Digite o valor a ser buscado ");
+            scanf("%d", &valor);
+            remover = buscar_na_lisla(&lista, valor);
+            if(remover){
+                printf("Elemento encontrado: %d\n", remover->valor);   
+            } else {
+                printf("Elemento não encontrado.");
+            }
+            break;
+        case 7:
             imprimirLista(lista);
             break;
 
