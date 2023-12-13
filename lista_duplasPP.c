@@ -5,6 +5,7 @@
 typedef struct no {
     int valor;
     struct no *proximo;
+    struct no *anterior;
 } No;
 
 void inserirNoInicio(No **lista, int num) {
@@ -13,6 +14,10 @@ void inserirNoInicio(No **lista, int num) {
     if (novo) {
         novo->valor = num;
         novo->proximo = *lista;
+        novo->anterior = NULL;
+        if(*lista){
+            (*lista)->anterior = novo;
+        }
         *lista = novo;
     } else {
         printf("Erro ao alocar memória.\n");
@@ -28,12 +33,14 @@ void inserirNoFinal(No **lista, int num) {
 
         if (*lista == NULL) {
             *lista = novo;
+            novo->anterior = NULL;
         } else {
             auxi = *lista;
             while (auxi->proximo) {
                 auxi = auxi->proximo;
             }
             auxi->proximo = novo;
+            novo->anterior = auxi;
         }
 
     } else {
@@ -48,6 +55,7 @@ void inserirNoMeio(No **lista, int num, int ant) {
         novo->valor = num;
         if (*lista == NULL) {
             novo->proximo = NULL;
+            novo->anterior = NULL;
             *lista = novo;
         } else {
             aux = *lista;
@@ -55,6 +63,8 @@ void inserirNoMeio(No **lista, int num, int ant) {
                 aux = aux->proximo;
             }
             novo->proximo = aux->proximo;
+            aux->proximo->anterior = novo;
+            novo->anterior = aux;
             aux->proximo = novo;
         }
     } else {
@@ -68,10 +78,13 @@ void inserir_ordrnado(No **lista, int num){
         novo->valor = num;
 
         if(*lista == NULL){
+            novo->proximo = NULL;
+            novo->anterior = NULL;
             *lista = novo;
         } else {
             if(novo->valor < (*lista)->valor){
                 novo->proximo = *lista;
+                (*lista)->anterior = novo;
                 *lista = novo;
             } else {
                 aux = *lista;
@@ -79,8 +92,11 @@ void inserir_ordrnado(No **lista, int num){
                     aux = aux->proximo;
                 }
                 novo->proximo = aux->proximo;
+                if(aux->proximo){
+                    aux->proximo->anterior = novo;
+                }
+                novo->anterior = aux;
                 aux->proximo = novo;
-                
             }
         }
     } else {
@@ -95,6 +111,9 @@ No* remove_na_lista(No **lista, int num){
         if((*lista)->valor == num){
             remover = *lista;
             *lista = remover->proximo;
+            if(*lista){
+                (*lista)->anterior = NULL;
+            }
         } else {
             aux = *lista;
             while (aux->proximo && aux->proximo->valor != num){
@@ -103,6 +122,9 @@ No* remove_na_lista(No **lista, int num){
             if(aux->proximo){
                 remover = aux->proximo;
                 aux->proximo = remover->proximo;
+                if(aux->proximo){
+                    aux->proximo->anterior = aux;
+                }
             }
             
         }
@@ -133,13 +155,30 @@ void imprimirLista(No *no) {
     printf("\n\n");
 }
 
+No* ultimo(No **lista){
+    No *aux = *lista;
+    while (aux->proximo){
+        aux = aux->proximo;
+    }
+    return aux;
+}
+
+void imprimirContrario(No *no){
+    printf("\n\tLista:");
+    while (no) {
+        printf("%d ", no->valor);
+        no = no->anterior;
+    }
+    printf("\n\n");
+}
+
 int main() {
 
     int opcao, valor, anterior;
     No *remover, *lista = NULL;
 
     do {
-        printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Remover\n\t6 - Buscar\n\t7 - Imprimir\n");
+        printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Remover\n\t6 - Buscar\n\t7 - Imprimir\n\t8 - ImprimirC\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -188,6 +227,9 @@ int main() {
             break;
         case 7:
             imprimirLista(lista);
+            break;
+        case 8:
+            imprimirContrario(ultimo(&lista));
             break;
 
         default:

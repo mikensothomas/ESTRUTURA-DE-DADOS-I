@@ -68,6 +68,7 @@ void inserir_ordrnado(No **lista, int num){
         novo->valor = num;
 
         if(*lista == NULL){
+            novo->proximo = NULL;
             *lista = novo;
         } else {
             if(novo->valor < (*lista)->valor){
