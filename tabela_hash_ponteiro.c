@@ -4,14 +4,12 @@
 
 #define TAM 31
 
-typedef struct no
-{
+typedef struct no{
     int chave;
     struct no *proximo;
 }No;
 
-typedef struct
-{
+typedef struct{
     No *inicio;
     int tam;
 }Lista;
@@ -28,6 +26,7 @@ void inserirNaLista(Lista *l, int valor){
         novo->chave = valor;
         novo->proximo = l->inicio;
         l->inicio = novo;
+        l->tam++;
     } else {
        printf("\n\tErro ao alocar memória.\n"); 
     }
@@ -55,58 +54,48 @@ void imprirLista(Lista *l){
     }
 }
 
-void inicializarTabela(Lista t[])
-{
-    for (int i = 0; i < TAM; i++)
-    {
+void inicializarTabela(Lista t[]){
+    for (int i = 0; i < TAM; i++){
         iniciarLista(&t[i]);
     }
     
 }
 
-int funcaoHash(int chave)
-{
+int funcaoHash(int chave){
     return chave % TAM;
 }
 
-void inserirNaTAbela(Lista t[], int valor)
-{
+void inserirNaTAbela(Lista t[], int valor){
     int id = funcaoHash(valor);
     inserirNaLista(&t[id], valor);
 }
 
-int buscarNaLista(Lista t[], int chave)
-{
+int buscarNaTabela(Lista t[], int chave){
     int id = funcaoHash(chave);
-    printf("\nIndice gerada gerada: %d\n", id);
+    printf("\nIndice gerada: %d\n", id);
     return buscaNaLista(&t[id], chave);
 }
 
-void imprimirTabela(Lista t[])
-{
-    for (int i = 0; i < TAM; i++)
-    {
-        printf("%d = ", i);
-        imprimirTabela(&t[i]);
+void imprimirTabela(Lista t[]){
+    for (int i = 0; i < TAM; i++){
+        printf("%2d = ", i);
+        imprirLista(&t[i]);
         printf("\n");
     }
     
 }
 
-int main()
-{
+int main(){
 
-    int opcao, valor, retorno, tabela[TAM];
+    int opcao, valor, retorno;
     Lista tabela[TAM];
-    
+
     inicializarTabela(tabela);
-    do
-    {
+    do{
         printf("\n\t0 - Sair\n\t1 - Inserir\n\t2 - Buscar\n\t3 - Imprimir\n");
         scanf("%d", &opcao);
 
-        switch (opcao)
-        {
+        switch (opcao){
         case 0:
             exit (0);
             break;
@@ -118,13 +107,10 @@ int main()
         case 2:
             printf("Digite um valor: ");
             scanf("%d", &valor);
-            retorno = buscarNaLista(tabela, valor);
-            if(retorno != 0)
-            {
+            retorno = buscarNaTabela(tabela, valor);
+            if(retorno != 0){
                 printf("\tValor encontrado: %d\n", retorno);
-            }
-            else
-            {
+            }else{
                 printf("\tO valor não encontrado.\n");
             }
             
