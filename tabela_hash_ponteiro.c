@@ -4,11 +4,62 @@
 
 #define TAM 31
 
-void inicializarTabela(int t[])
+typedef struct no
+{
+    int chave;
+    struct no *proximo;
+}No;
+
+typedef struct
+{
+    No *inicio;
+    int tam;
+}Lista;
+
+void iniciarLista(Lista *l){
+    l->inicio = NULL;
+    l->tam = 0;
+}
+
+void inserirNaLista(Lista *l, int valor){
+    No *novo = (No*) malloc(sizeof(No));
+
+    if(novo){
+        novo->chave = valor;
+        novo->proximo = l->inicio;
+        l->inicio = novo;
+    } else {
+       printf("\n\tErro ao alocar memória.\n"); 
+    }
+}
+
+int buscaNaLista(Lista *l, int valor){
+    No *aux = l->inicio;
+    while (aux && aux->chave != valor)
+    {
+        aux = aux->proximo;
+    }
+    if (aux)
+    {
+        return aux->chave;
+    }
+    return 0;
+}
+
+void imprirLista(Lista *l){
+    No *aux = l->inicio;
+    printf(" Tam: %d: ", l->tam);
+    while (aux){
+        printf("%d ", aux->chave);
+        aux = aux->proximo;
+    }
+}
+
+void inicializarTabela(Lista t[])
 {
     for (int i = 0; i < TAM; i++)
     {
-        t[i] = 0;
+        iniciarLista(&t[i]);
     }
     
 }
@@ -18,35 +69,26 @@ int funcaoHash(int chave)
     return chave % TAM;
 }
 
-void inserirNaTAbela(int t[], int valor)
+void inserirNaTAbela(Lista t[], int valor)
 {
     int id = funcaoHash(valor);
-    while (t[id] != 0)
-    {
-        id = funcaoHash(id + 1);
-    }
-    t[id] = valor;
+    inserirNaLista(&t[id], valor);
 }
 
-int buscarNaLista(int t[], int chave)
+int buscarNaLista(Lista t[], int chave)
 {
     int id = funcaoHash(chave);
     printf("\nIndice gerada gerada: %d\n", id);
-    while (t[id] != 0)
-    {
-        if(t[id] == chave)
-            return t[id]; 
-        else
-            id = funcaoHash(id + 1);
-    }
-    return 0;  
+    return buscaNaLista(&t[id], chave);
 }
-/*Mikenson Thomas*/
-void imprimirTabela(int t[])
+
+void imprimirTabela(Lista t[])
 {
     for (int i = 0; i < TAM; i++)
     {
-        printf("%d = %d\n", i, t[i]);
+        printf("%d = ", i);
+        imprimirTabela(&t[i]);
+        printf("\n");
     }
     
 }
@@ -55,6 +97,8 @@ int main()
 {
 
     int opcao, valor, retorno, tabela[TAM];
+    Lista tabela[TAM];
+    
     inicializarTabela(tabela);
     do
     {
