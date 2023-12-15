@@ -26,6 +26,10 @@ void infileira(int dado, T_FILA *f){
     }
 }
 
+void infileira_prioridade(T_FILA *f, int dado){
+    /*Aqui vão os elementos*/
+}
+
 int desenfileira(T_FILA *f){
     int dado;
     if(f->fim == 0){
