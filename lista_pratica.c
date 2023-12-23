@@ -4,9 +4,8 @@
 
 typedef struct No{
     int valor;
-    No *prox;
+    struct No *prox;
 }No;
-
 typedef struct Lista{
     No *inicio;
     int tam;
@@ -92,6 +91,7 @@ int main(){
                 inserirNoFinal(&lista, numero);
                 break;
             case 3:
+            printf("A lista: ");
                 imprimirLista(&lista);
                 break;
             default:

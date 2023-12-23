@@ -10,7 +10,6 @@ typedef struct no {
 
 void inserirNoInicio(No **lista, int num) {
     No *novo = (No *)malloc(sizeof(No));
-
     if (novo) {
         novo->valor = num;
         novo->proximo = *lista;
@@ -155,13 +154,18 @@ void imprimirLista(No *no) {
     printf("\n\n");
 }
 
-No* ultimo(No **lista){
+No* ultimo(No **lista) {
+    if (*lista == NULL) {
+        return NULL; // Retorna NULL se a lista estiver vazia
+    }
+
     No *aux = *lista;
-    while (aux->proximo){
+    while (aux->proximo) {
         aux = aux->proximo;
     }
     return aux;
 }
+
 
 void imprimirContrario(No *no){
     printf("\n\tLista:");
