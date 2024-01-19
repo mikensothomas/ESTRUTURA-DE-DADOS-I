@@ -4,22 +4,18 @@
 
 #define TAM 31
 
-void inicializarTabela(int t[])
-{
-    for (int i = 0; i < TAM; i++)
-    {
+void inicializarTabela(int t[]){
+    for (int i = 0; i < TAM; i++){
         t[i] = 0;
     }
     
 }
 
-int funcaoHash(int chave)
-{
+int funcaoHash(int chave){
     return chave % TAM;
 }
 
-void inserirNaTAbela(int t[], int valor)
-{
+void inserirNaTAbela(int t[], int valor){
     int id = funcaoHash(valor);
     while (t[id] != 0)
     {
@@ -28,8 +24,7 @@ void inserirNaTAbela(int t[], int valor)
     t[id] = valor;
 }
 
-int buscarNaLista(int t[], int chave)
-{
+int buscarNaLista(int t[], int chave){
     int id = funcaoHash(chave);
     printf("\nIndice gerada gerada: %d\n", id);
     while (t[id] != 0)
@@ -41,9 +36,8 @@ int buscarNaLista(int t[], int chave)
     }
     return 0;  
 }
-/*Mikenson Thomas*/
-void imprimirTabela(int t[])
-{
+
+void imprimirTabela(int t[]){
     for (int i = 0; i < TAM; i++)
     {
         printf("%d = %d\n", i, t[i]);
@@ -51,8 +45,7 @@ void imprimirTabela(int t[])
     
 }
 
-int main()
-{
+int main(){
 
     int opcao, valor, retorno, tabela[TAM];
     inicializarTabela(tabela);
