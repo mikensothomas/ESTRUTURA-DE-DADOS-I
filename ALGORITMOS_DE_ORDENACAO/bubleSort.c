@@ -38,14 +38,17 @@ void imprimir(int *v, int tam){
 }
 
 int main(){
-    int vet[] = {5,8,9,4,6,3,7,1,2};
-    int tam = 9;
+    int vet[] = {5,8,9,4,6,10,3,7,1,2};
+    int tam = 10;
 
     imprimir(vet, tam);
 
     bubleSort(vet, tam);
-    //bubleSortRecursivo(vet, tam);
+    imprimir(vet, tam);
 
+    printf("bubleSortRecursivo\n");
+
+    bubleSortRecursivo(vet, tam);
     imprimir(vet, tam);
     return 0;
 }
